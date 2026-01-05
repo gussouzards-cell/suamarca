@@ -2,10 +2,6 @@
   "buildCommand": "npm run build",
   "installCommand": "npm install",
   "framework": "nextjs",
-  "rootDirectory": ".",
-  "regions": ["gru1"],
-  "env": {
-    "PRISMA_GENERATE_DATAPROXY": "false"
-  }
+  "regions": ["gru1"]
 }
 

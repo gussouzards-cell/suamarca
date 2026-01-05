@@ -5,12 +5,14 @@ A Vercel não está detectando o Next.js no seu projeto.
 
 ## Soluções
 
-### Solução 1: Configurar Root Directory na Vercel
+### Solução 1: Configurar Root Directory na Vercel (Interface Web)
 
 1. No painel da Vercel, vá em **Settings → General**
 2. Procure por **Root Directory**
-3. Deixe vazio (`.`) ou remova qualquer valor
+3. Deixe vazio ou remova qualquer valor (não configure no vercel.json)
 4. Salve e faça um novo deploy
+
+**Nota**: O `rootDirectory` deve ser configurado apenas na interface web da Vercel, não no arquivo `vercel.json`.
 
 ### Solução 2: Verificar Estrutura do Repositório
 
