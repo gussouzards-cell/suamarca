@@ -262,9 +262,9 @@ export default async function DashboardPage() {
               <CardContent>
                 <div className="space-y-1">
                   <p className="text-2xl font-bold">
-                    {user?.subscription?.plan === "PRO" && user?.subscription?.status === "ACTIVE" ? "PRO" : "FREE"}
+                    {user?.subscription && user.subscription.plan === "PRO" && user.subscription.status === "ACTIVE" ? "PRO" : "FREE"}
                   </p>
-                  {user?.subscription?.plan === "PRO" && user?.subscription?.status === "ACTIVE" ? (
+                  {user?.subscription && user.subscription.plan === "PRO" && user.subscription.status === "ACTIVE" ? (
                     <p className="text-xs text-muted-foreground">Gerações ilimitadas</p>
                   ) : (
                     <p className="text-xs text-muted-foreground">
