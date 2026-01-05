@@ -6,14 +6,17 @@ O seu `package.json` está correto e tem o Next.js instalado. O problema é de c
 
 ## 🔧 Solução Passo a Passo
 
-### 1. Verificar Root Directory na Vercel
+### 1. Verificar Root Directory na Vercel ⚠️ IMPORTANTE
+
+**Seu repositório Git está em `Desktop` e o projeto está em `suamarca/`**
 
 1. Acesse o painel da Vercel: https://vercel.com
 2. Vá no seu projeto → **Settings** → **General**
 3. Procure por **Root Directory**
-4. **IMPORTANTE**: Deixe vazio ou configure como `.` (ponto)
+4. **Configure como**: `suamarca` (nome da pasta do projeto)
+   - ❌ NÃO deixe vazio (a Vercel vai procurar na raiz do Desktop)
    - ❌ NÃO configure no `vercel.json`
-   - ✅ Configure apenas na interface web da Vercel
+   - ✅ Configure como `suamarca` na interface web da Vercel
 
 ### 2. Forçar Detecção do Framework
 
@@ -36,9 +39,9 @@ O seu `package.json` está correto e tem o Next.js instalado. O problema é de c
 
 Antes de fazer deploy, verifique:
 
-- [ ] `package.json` está na raiz do projeto (não em subpasta)
+- [ ] `package.json` está na pasta `suamarca/` ✅
 - [ ] `next` está em `dependencies` (não em `devDependencies`) ✅
-- [ ] Root Directory na Vercel está vazio ou como `.`
+- [ ] Root Directory na Vercel está configurado como **`suamarca`** ⚠️
 - [ ] Framework Preset está configurado como **Next.js**
 - [ ] Build Command está como `npm run build`
 
@@ -71,12 +74,14 @@ Se funcionar localmente, o problema é apenas de configuração na Vercel.
 
 ```
 Framework Preset: Next.js
-Root Directory: . (ou vazio)
+Root Directory: suamarca ⚠️ (nome da pasta do projeto)
 Build Command: npm run build
 Output Directory: (vazio)
 Install Command: npm install
 Node.js Version: 18.x ou 20.x
 ```
+
+**⚠️ ATENÇÃO**: Como seu repositório Git está na pasta `Desktop` e o projeto está em `suamarca/`, você DEVE configurar o Root Directory como `suamarca` na Vercel!
 
 ## 🔗 Próximos Passos
 
