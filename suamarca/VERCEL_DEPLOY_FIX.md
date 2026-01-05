@@ -87,3 +87,4 @@ Após corrigir a configuração:
 3. Execute as migrations: `npx prisma migrate deploy`
 4. Teste a aplicação
 
+

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Pizzaria Dom Gemini</title>
+    <style>
+        /* --- CSS: O ESTILO VISUAL --- */
+        :root {
+            --primary: #ff6b6b;
+            --dark: #333;
+            --light: #f4f4f4;
+        }
+
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--light); margin: 0; padding: 20px; }
+        h1, h2 { color: var(--dark); }
+        
+        /* Layout Principal */
+        .container { display: flex; gap: 20px; max-width: 1200px; margin: 0 auto; flex-wrap: wrap; }
+        .menu-section { flex: 2; min-width: 300px; }
+        .cart-section { flex: 1; min-width: 300px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); height: fit-content; }
+        
+        /* Cards das Pizzas */
+        .pizza-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
+        .pizza-card { background: white; padding: 15px; border-radius: 8px; text-align: center; border: 1px solid #ddd; transition: transform 0.2s; }
+        .pizza-card:hover { transform: translateY(-5px); border-color: var(--primary); }
+        .pizza-card h3 { margin: 10px 0; color: var(--primary); }
+        .price { font-weight: bold; font-size: 1.2em; color: var(--dark); }
+        button { background-color: var(--primary); color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; margin-top: 10px; width: 100%; }
+        button:hover { background-color: #e55a5a; }
+
+        /* Carrinho */
+        .cart-item { display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding: 10px 0; }
+        .total-display { font-size: 1.5em; font-weight: bold; margin-top: 20px; text-align: right; }
+        
+        /* Histórico */
+        .history-section { width: 100%; max-width: 1200px; margin: 40px auto; background: white; padding: 20px; border-radius: 8px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #ddd; }
+        
+        /* --- ESTILO DA COMANDA (MODAL) --- */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000; }
+        .receipt-paper { background: #fff; width: 300px; padding: 20px; font-family: 'Courier New', Courier, monospace; box-shadow: 0 0 20px rgba(0,0,0,0.3); position: relative; }
+        .receipt-header, .receipt-footer { text-align: center; }
+        .dashed-line { border-top: 1px dashed #000; margin: 10px 0; }
+        .btn-print { background: #333; margin-top: 15px; }
+        .btn-close { background: #999; margin-top: 5px; }
+
+        /* Configuração para Impressão Real */
+        @media print {
+            body * { visibility: hidden; }
+            .receipt-paper, .receipt-paper * { visibility: visible; }
+            .receipt-paper { position: absolute; left: 0; top: 0; width: 100%; box-shadow: none; }
+            .no-print { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1 style="text-align: center;">🍕 Pizzaria Dom Gemini</h1>
+
+    <div class="container">
+        <div class="menu-section">
+            <h2>Cardápio</h2>
+            <div id="pizza-list" class="pizza-grid">
+                </div>
+        </div>
+
+        <div class="cart-section">
+            <h2>Seu Pedido</h2>
+            <div>
+                <input type="text" id="client-name" placeholder="Nome do Cliente" style="width: 90%; padding: 8px; margin-bottom: 10px;">
+            </div>
+            <div id="cart-items">
+                <p style="color: #777;">Nenhum item adicionado.</p>
+            </div>
+            <div class="total-display">Total: R$ <span id="cart-total">0.00</span></div>
+            <button onclick="finalizarPedido()" style="background-color: #28a745; font-size: 1.1em; margin-top: 20px;">✅ Finalizar e Imprimir</button>
+        </div>
+    </div>
+
+    <div class="history-section">
+        <h2>📜 Histórico de Pedidos</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Data/Hora</th>
+                    <th>Cliente</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody id="history-list">
+                </tbody>
+        </table>
+    </div>
+
+    <div class="modal-overlay" id="receipt-modal">
+        <div class="receipt-paper">
+            <div class="receipt-header">
+                <h3>PIZZARIA DOM GEMINI</h3>
+                <p>Rua da Tecnologia, 1010</p>
+                <div class="dashed-line"></div>
+            </div>
+            <div id="receipt-content">
+                </div>
+            <div class="receipt-footer">
+                <div class="dashed-line"></div>
+                <p>Obrigado pela preferência!</p>
+            </div>
+            <button class="btn-print no-print" onclick="window.print()">🖨️ Imprimir</button>
+            <button class="btn-close no-print" onclick="fecharModal()">Fechar</button>
+        </div>
+    </div>
+
+    <script>
+        // --- JAVASCRIPT: A LÓGICA DO SISTEMA ---
+
+        // 1. Dados (Banco de Dados Simulado)
+        const menu = [
+            { id: 1, nome: "Mussarela", desc: "Queijo e orégano", preco: 30.00 },
+            { id: 2, nome: "Calabresa", desc: "Calabresa e cebola", preco: 35.00 },
+            { id: 3, nome: "Portuguesa", desc: "Ovo, presunto, ervilha", preco: 42.00 },
+            { id: 4, nome: "4 Queijos", desc: "Mussarela, provolone, gorg.", preco: 45.00 },
+            { id: 5, nome: "Frango c/ Catupiry", desc: "Frango desfiado original", preco: 40.00 }
+        ];
+
+        let carrinho = [];
+        let historico = [];
+        let idPedidoAtual = 1;
+
+        // 2. Inicialização
+        function init() {
+            const listaPizzas = document.getElementById('pizza-list');
+            
+            menu.forEach(pizza => {
+                const div = document.createElement('div');
+                div.className = 'pizza-card';
+                div.innerHTML = `
+                    <h3>${pizza.nome}</h3>
+                    <p>${pizza.desc}</p>
+                    <div class="price">R$ ${pizza.preco.toFixed(2)}</div>
+                    <button onclick="adicionarAoCarrinho(${pizza.id})">Adicionar +</button>
+                `;
+                listaPizzas.appendChild(div);
+            });
+        }
+
+        // 3. Funções do Carrinho
+        function adicionarAoCarrinho(id) {
+            const pizza = menu.find(p => p.id === id);
+            carrinho.push(pizza);
+            atualizarCarrinhoUI();
+        }
+
+        function atualizarCarrinhoUI() {
+            const container = document.getElementById('cart-items');
+            const totalSpan = document.getElementById('cart-total');
+            
+            container.innerHTML = '';
+            let total = 0;
+
+            if (carrinho.length === 0) {
+                container.innerHTML = '<p style="color: #777;">Nenhum item adicionado.</p>';
+            } else {
+                carrinho.forEach((item, index) => {
+                    total += item.preco;
+                    const div = document.createElement('div');
+                    div.className = 'cart-item';
+                    div.innerHTML = `
+                        <span>${item.nome}</span>
+                        <span>R$ ${item.preco.toFixed(2)} <a href="#" onclick="removerDoCarrinho(${index})" style="color:red; text-decoration:none;">(x)</a></span>
+                    `;
+                    container.appendChild(div);
+                });
+            }
+            totalSpan.innerText = total.toFixed(2);
+        }
+
+        function removerDoCarrinho(index) {
+            carrinho.splice(index, 1);
+            atualizarCarrinhoUI();
+        }
+
+        // 4. Finalizar Pedido e Gerar Comanda
+        function finalizarPedido() {
+            const nomeCliente = document.getElementById('client-name').value;
+            
+            if (carrinho.length === 0) {
+                alert("O carrinho está vazio!");
+                return;
+            }
+            if (!nomeCliente) {
+                alert("Por favor, digite o nome do cliente.");
+                return;
+            }
+
+            // Cria objeto do pedido
+            const totalPedido = carrinho.reduce((sum, item) => sum + item.preco, 0);
+            const dataHora = new Date();
+            
+            const pedido = {
+                id: idPedidoAtual,
+                cliente: nomeCliente,
+                itens: [...carrinho], // Cópia do array
+                total: totalPedido,
+                data: dataHora.toLocaleString()
+            };
+
+            // Salva no histórico
+            historico.push(pedido);
+            atualizarHistoricoUI();
+            
+            // Prepara a comanda visual
+            mostrarComanda(pedido);
+
+            // Limpa sistema para o próximo
+            carrinho = [];
+            document.getElementById('client-name').value = '';
+            atualizarCarrinhoUI();
+            idPedidoAtual++;
+        }
+
+        // 5. Histórico e Comanda
+        function atualizarHistoricoUI() {
+            const tbody = document.getElementById('history-list');
+            tbody.innerHTML = '';
+            
+            // Mostra do mais recente para o mais antigo
+            [...historico].reverse().forEach(ped => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>#${ped.id.toString().padStart(4, '0')}</td>
+                    <td>${ped.data}</td>
+                    <td>${ped.cliente}</td>
+                    <td>R$ ${ped.total.toFixed(2)}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function mostrarComanda(pedido) {
+            const content = document.getElementById('receipt-content');
+            let itensHtml = '';
+            pedido.itens.forEach(item => {
+                itensHtml += `
+                    <div style="display:flex; justify-content:space-between;">
+                        <span>${item.nome}</span>
+                        <span>${item.preco.toFixed(2)}</span>
+                    </div>
+                `;
+            });
+
+            content.innerHTML = `
+                <p><strong>PEDIDO: #${pedido.id.toString().padStart(4, '0')}</strong></p>
+                <p>DATA: ${pedido.data}</p>
+                <p>CLIENTE: ${pedido.cliente.toUpperCase()}</p>
+                <div class="dashed-line"></div>
+                ${itensHtml}
+                <div class="dashed-line"></div>
+                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:1.2em;">
+                    <span>TOTAL:</span>
+                    <span>R$ ${pedido.total.toFixed(2)}</span>
+                </div>
+            `;
+
+            document.getElementById('receipt-modal').style.display = 'flex';
+        }
+
+        function fecharModal() {
+            document.getElementById('receipt-modal').style.display = 'none';
+        }
+
+        // Inicia o sistema
+        init();
+    </script>
+</body>
+</html>

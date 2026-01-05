@@ -1,0 +1,77 @@
+
+Alinhamento POC
+
+
+POC Copilot:
+
+Javascript - Integração. 
+
+Começar com o GUS sendo o ponto focal, avaliar o que era antes e pos ferramenta.
+
+Igor - pouco conhecimento em JS e acompanhamos a evolução dele 
+
+
+
+Atividade:
+
+Validar se precisamos de algo do lado da Cogna em JS.
+
+Levantar ultimas atividades de JS feitas pelo GUS.
+
+Falar com o Igor e alinhar com ele sobre essa iniciativa
+
+Igor talvez pegar uma atividade ja realizada pelo Gus para podermos comparar.
+
+
+
+Indicadores:
+
+O que a ferramenta traz de produtividade para um dev que já coda em JS?
+
+O que a ferramenta consegue diminuir na curva de aprendizado de alguem que nunca trabalhou com JS?
+
+Quais os ganhos totais?
+
+
+
+Métricas Quantitativas:
+
+Taxa de conclusão de tarefas: Avaliar a taxa de conclusão de tarefas de desenvolvimento de software com e sem o GitHub Copilot. Registrar quantas tarefas foram concluídas com sucesso em cada cenário.
+
+Tempo gasto no desenvolvimento: Medir o tempo médio gasto em cada tarefa de desenvolvimento com e sem o GitHub Copilot. Comparar os tempos para identificar economias de tempo.
+
+Taxa de erros no código: Comparar a taxa de erros introduzidos no código durante o desenvolvimento com e sem o GitHub Copilot. Isso pode ser medido usando ferramentas de análise estática de código ou revisões de código.
+
+Eficiência de revisões de código: Avaliar se o uso do GitHub Copilot resulta em revisões de código mais eficientes, onde menos revisões são necessárias devido a erros de código. Registrar o número de revisões e o tempo gasto em cada revisão.
+
+Complexidade do código: Medir a complexidade média do código gerado com o GitHub Copilot em comparação com o código escrito manualmente. Isso pode ser feito usando métricas de complexidade ciclomática ou outras métricas relevantes.
+
+
+
+Métricas Qualitativas:
+
+Qualidade do código: Avaliar a qualidade geral do código produzido com o GitHub Copilot. Isso pode ser determinado através de revisões de código e análise manual do código gerado.
+
+Adoção da equipe: Coletar feedback da equipe de desenvolvimento para avaliar a aceitação e a disposição de adotar o GitHub Copilot. Isso pode ser feito por meio de pesquisas ou entrevistas.
+
+
+
+Próximos passos:
+
+Pegar validação formal com o Pessini.
+
+
+
+passo a traz e exploror tecnicamente me modelo de dojo 
+trazer o teach lead para um experimento (dojo)
+dojo de 2 horas forum reduzido 
+implentar na proxima PI
+e ja ter metricas na proxima PI
+
+Setar modelo de desenvolvimento 
+incluir David na POC
+Fase 1 implantar e entender as metricas
+analisar as historias /
+trazer uma visão de melhorias em codigos legados
+
+

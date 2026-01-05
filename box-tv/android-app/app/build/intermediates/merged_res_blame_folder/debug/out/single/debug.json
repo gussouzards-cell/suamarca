@@ -1,0 +1,58 @@
+[
+    {
+        "merged": "C:\\Users\\Saba\\.gradle\\daemon\\9.0-milestone-1\\com.radioindoor.app-merged_res-38:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\Saba\\.gradle\\daemon\\9.0-milestone-1\\com.radioindoor.app-main-40:\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "com.radioindoor.app-merged_res-38:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.radioindoor.app-main-40:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\Saba\\.gradle\\daemon\\9.0-milestone-1\\com.radioindoor.app-merged_res-38:\\xml_file_provider_paths.xml.flat",
+        "source": "C:\\Users\\Saba\\.gradle\\daemon\\9.0-milestone-1\\com.radioindoor.app-main-40:\\xml\\file_provider_paths.xml"
+    },
+    {
+        "merged": "C:\\Users\\Saba\\.gradle\\daemon\\9.0-milestone-1\\com.radioindoor.app-merged_res-38:\\xml_network_security_config.xml.flat",
+        "source": "C:\\Users\\Saba\\.gradle\\daemon\\9.0-milestone-1\\com.radioindoor.app-main-40:\\xml\\network_security_config.xml"
+    },
+    {
+        "merged": "com.radioindoor.app-merged_res-38:/layout_activity_main.xml.flat",
+        "source": "com.radioindoor.app-main-40:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.radioindoor.app-merged_res-38:/xml_network_security_config.xml.flat",
+        "source": "com.radioindoor.app-main-40:/xml/network_security_config.xml"
+    },
+    {
+        "merged": "C:\\Users\\Saba\\.gradle\\daemon\\9.0-milestone-1\\com.radioindoor.app-merged_res-38:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\Saba\\.gradle\\daemon\\9.0-milestone-1\\com.radioindoor.app-main-40:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "com.radioindoor.app-merged_res-38:/xml_file_provider_paths.xml.flat",
+        "source": "com.radioindoor.app-main-40:/xml/file_provider_paths.xml"
+    },
+    {
+        "merged": "com.radioindoor.app-merged_res-38:/drawable_ic_notification.xml.flat",
+        "source": "com.radioindoor.app-main-40:/drawable/ic_notification.xml"
+    },
+    {
+        "merged": "C:\\Users\\Saba\\.gradle\\daemon\\9.0-milestone-1\\com.radioindoor.app-merged_res-38:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\Saba\\.gradle\\daemon\\9.0-milestone-1\\com.radioindoor.app-main-40:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.radioindoor.app-merged_res-38:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.radioindoor.app-main-40:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "C:\\Users\\Saba\\.gradle\\daemon\\9.0-milestone-1\\com.radioindoor.app-merged_res-38:\\drawable_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\Saba\\.gradle\\daemon\\9.0-milestone-1\\com.radioindoor.app-main-40:\\drawable\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.radioindoor.app-merged_res-38:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.radioindoor.app-main-40:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\Saba\\.gradle\\daemon\\9.0-milestone-1\\com.radioindoor.app-merged_res-38:\\drawable_ic_notification.xml.flat",
+        "source": "C:\\Users\\Saba\\.gradle\\daemon\\9.0-milestone-1\\com.radioindoor.app-main-40:\\drawable\\ic_notification.xml"
+    }
+]

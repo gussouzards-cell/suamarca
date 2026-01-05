@@ -1,0 +1,4 @@
+com.radioindoor.app.test.app-androidTest-0 C:\Users\Saba\Desktop\box-tv\android-app\app\build\generated\res\resValues\androidTest\debug
+com.radioindoor.app.test.app-mergeDebugAndroidTestResources-1 C:\Users\Saba\Desktop\box-tv\android-app\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
+com.radioindoor.app.test.app-mergeDebugAndroidTestResources-2 C:\Users\Saba\Desktop\box-tv\android-app\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
+com.radioindoor.app.test.app-merged_res-3 C:\Users\Saba\Desktop\box-tv\android-app\app\build\intermediates\merged_res\debugAndroidTest
