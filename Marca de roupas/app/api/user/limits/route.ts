@@ -4,6 +4,10 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { checkUserLimits } from "@/lib/subscription";
 
+// Forçar renderização dinâmica (usa headers para autenticação)
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 export async function GET() {
   try {
     const session = await getServerSession(authOptions);
