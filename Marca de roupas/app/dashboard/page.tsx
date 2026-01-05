@@ -5,7 +5,7 @@ import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Sparkles, Upload, ShoppingBag, Package, Image as ImageIcon, Crown, Calculator } from "lucide-react";
+import { Sparkles, Upload, ShoppingBag, Package, Image as ImageIcon, Crown, Calculator, Shield } from "lucide-react";
 
 export default async function DashboardPage() {
   const session = await getServerSession(authOptions);
@@ -61,6 +61,14 @@ export default async function DashboardPage() {
             Sua Marca
           </Link>
           <div className="flex items-center gap-4">
+            {user?.isAdmin && (
+              <Link href="/admin">
+                <Button variant="outline" size="sm">
+                  <Shield className="h-4 w-4 mr-2" />
+                  Admin
+                </Button>
+              </Link>
+            )}
             <span className="text-sm text-muted-foreground">{user?.email}</span>
             <Link href="/api/auth/signout">
               <Button variant="ghost" size="sm">Sair</Button>
