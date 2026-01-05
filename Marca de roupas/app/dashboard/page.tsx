@@ -24,6 +24,7 @@ export default async function DashboardPage() {
           },
         },
       },
+      subscription: true,
     },
   });
 
