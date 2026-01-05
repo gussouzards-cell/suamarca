@@ -84,7 +84,7 @@ export default async function DashboardPage() {
           <p className="text-muted-foreground">{brand.description || "Sua marca de roupas"}</p>
         </div>
 
-        {user?.subscription?.plan !== "PRO" && (
+        {(!user?.subscription || user.subscription.plan !== "PRO") && (
           <Card className="mb-6 border-primary/50 bg-primary/5">
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
@@ -215,7 +215,7 @@ export default async function DashboardPage() {
           </div>
         )}
 
-        {user?.subscription?.plan !== "PRO" && (
+        {(!user?.subscription || user.subscription.plan !== "PRO") && (
           <Card className="mb-6 border-primary/50 bg-primary/5">
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
