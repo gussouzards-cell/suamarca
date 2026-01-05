@@ -41,6 +41,10 @@ export async function generateDesignImage(prompt: string) {
     response_format: "url",
   });
 
+  if (!response.data || response.data.length === 0 || !response.data[0].url) {
+    throw new Error("Falha ao gerar imagem: resposta vazia da OpenAI");
+  }
+
   return response.data[0].url;
 }
 
