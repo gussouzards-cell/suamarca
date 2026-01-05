@@ -88,8 +88,8 @@ export async function POST(req: NextRequest) {
             id: `plan-pro-${user.id}`,
             title: `Plano PRO - Sua Marca`,
             quantity: 1,
-            unit_price: price,
-            currency_id: "BRL",
+            unit_price: Number(price),
+            currency_id: "BRL" as const,
           },
         ],
         back_urls: {
@@ -97,13 +97,13 @@ export async function POST(req: NextRequest) {
           failure: `${baseUrl}/dashboard/plans/failure`,
           pending: `${baseUrl}/dashboard/plans/pending`,
         },
-        auto_return: "approved",
+        auto_return: "approved" as const,
         metadata: {
           userId: user.id,
           plan: plan,
         },
         notification_url: `${baseUrl}/api/webhooks/mercadopago`,
-      };
+      } as any;
 
       const response = await preference.create({ body: paymentData });
 
