@@ -85,6 +85,7 @@ export async function POST(req: NextRequest) {
       const paymentData = {
         items: [
           {
+            id: `plan-pro-${user.id}`,
             title: `Plano PRO - Sua Marca`,
             quantity: 1,
             unit_price: price,
