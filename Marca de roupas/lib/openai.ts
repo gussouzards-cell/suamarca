@@ -1,11 +1,27 @@
 import OpenAI from "openai";
 
-if (!process.env.OPENAI_API_KEY) {
-  throw new Error("OPENAI_API_KEY não configurada");
-}
+// Inicializar OpenAI apenas se a chave estiver disponível
+// Não lançar erro no build, apenas quando a função for chamada
+const getOpenAIClient = () => {
+  if (!process.env.OPENAI_API_KEY) {
+    throw new Error("OPENAI_API_KEY não configurada");
+  }
+  return new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+  });
+};
 
-export const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+// Criar instância lazy - só será criada quando necessário
+let openaiInstance: OpenAI | null = null;
+
+export const openai = new Proxy({} as OpenAI, {
+  get(_target, prop) {
+    if (!openaiInstance) {
+      openaiInstance = getOpenAIClient();
+    }
+    const value = openaiInstance[prop as keyof OpenAI];
+    return typeof value === 'function' ? value.bind(openaiInstance) : value;
+  },
 });
 
 export async function generateDesignPrompt(userPrompt: string, brandStyle?: string) {
